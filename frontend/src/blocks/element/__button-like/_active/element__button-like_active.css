@@ -1,0 +1,4 @@
+.element__button-like_active {
+  background-image: url(../../../../images/heart-filled.svg);
+  cursor: pointer;
+}

@@ -1,0 +1,6 @@
+.form {
+  display: flex;
+  max-width: 358px;
+  flex-direction: column;
+  flex-shrink: 0;
+}
