@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.53.43
+IP 158.160.53.43
 
 Frontend https://mesto.bymaria.nomoreparties.co
 
