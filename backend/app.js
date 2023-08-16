@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookie = require('cookie-parser');
+const cors = require('cors');
 const userRouter = require('./routes/user');
 const cardRouter = require('./routes/card');
 const { createUser, login } = require('./controllers/user');
@@ -13,6 +14,11 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 const { PORT = 3000 } = process.env;
+
+app.use(cors({
+  origin: 'https://mesto.bymaria.nomoreparties.co',
+  credentials: true,
+}));
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useNewUrlParser: true,
