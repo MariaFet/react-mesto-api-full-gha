@@ -88,8 +88,7 @@ export class Api {
 const api = new Api({
   baseUrl: 'https://api.mesto.bymaria.nomoreparties.co',
   headers: {
-    authorization: '5bfaf0ab-f77d-40e6-a7ad-185983fcd4bc',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   }
 });
 
