@@ -13,6 +13,7 @@ export const signUp = ({password, email}) => {
     headers: {
       "Content-Type": "application/json"
     },
+    credentials: 'include',
     body: JSON.stringify({password, email})
   })
   .then(res => checkResponse(res))
@@ -24,6 +25,7 @@ export const signIn = ({password, email}) => {
     headers: {
       "Content-Type": "application/json"
     },
+    credentials: 'include',
     body: JSON.stringify({email, password})
   })
   .then(res => checkResponse(res))
@@ -41,7 +43,8 @@ export const checkToken = (token) => {
     headers: {
       "Content-Type": "application/json",
       "Authorization" : `Bearer ${token}`
-    }
+    },
+    credentials: 'include',
   })
   .then(res => checkResponse(res))
 }
