@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookie = require('cookie-parser');
-const cors = require('cors');
+// const cors = require('cors');
 const userRouter = require('./routes/user');
 const cardRouter = require('./routes/card');
 const { createUser, login } = require('./controllers/user');
@@ -24,7 +24,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 app.use(express.json());
 app.use(cookie());
 
-app.use(cors({ origin: 'https://mesto.bymaria.nomoreparties.com', credentials: true }));
+// app.use(cors({ origin: 'https://mesto.bymaria.nomoreparties.com', credentials: true }));
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://mesto.bymaria.nomoreparties.co');
   res.setHeader(
