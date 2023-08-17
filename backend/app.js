@@ -21,9 +21,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useUnifiedTopology: false,
 });
 
-app.use(cors());
+app.use(cors({ origin: 'https://mesto.bymaria.nomoreparties.com', credentials: true }));
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://mesto.bymaria.nomoreparties.co');
+  res.setHeader('Access-Control-Allow-Origin', 'https://mesto.bymaria.nomoreparties.co');
   next();
 });
 
