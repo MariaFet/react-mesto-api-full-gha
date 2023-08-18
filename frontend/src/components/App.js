@@ -33,7 +33,7 @@ function App() {
     //const token = localStorage.getItem('jwt');
     const userId = localStorage.getItem('userId');
     if (userId) {
-      auth.checkToken()
+      auth.checkToken(userId)
       .then((res) => {
         //if (res) {
           setLoggedIn(true);
