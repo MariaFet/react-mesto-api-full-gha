@@ -8,8 +8,8 @@ const NotAuthorizedError = require('../errors/NotAuthorizedError');
 
 require('dotenv').config();
 
-// const { JWT_SECRET, NODE_ENV } = process.env;
-const JWT_SECRET = 'df740be8e1dd975abfe3aee5fecab33b700a4c3da01e44ba135240a0cccb1ac5';
+const { JWT_SECRET, NODE_ENV } = process.env;
+// const JWT_SECRET = 'df740be8e1dd975abfe3aee5fecab33b700a4c3da01e44ba135240a0cccb1ac5';
 
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
@@ -111,7 +111,7 @@ module.exports.login = (req, res, next) => {
           if (!matched) {
             return next(new NotAuthorizedError('Неправильные почта или пароль'));
           }
-          const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'secret-key', { expiresIn: '7d' });
           res.cookie('jwt', token, {
             maxAge: 3600000,
             httpOnly: true,
