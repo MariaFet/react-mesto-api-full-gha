@@ -136,13 +136,17 @@ function App() {
     if (!isLiked) {
       api.addLike(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        // setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+        setCards(newCards);
       })
       .catch(err => console.log(err));
     } else {
       api.deleteLike(card._id)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        // setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        const newCards = cards.map((c) => c._id === card._id? newCard : c);
+        setCards(newCards);
       })
       .catch(err => console.log(err));
     }
@@ -151,7 +155,9 @@ function App() {
   function handleCardDelete (card) {
     api.deleteCard (card._id)
     .then((newCard) => {
-      setCards((state) => state.filter((c) => c._id !== card._id));
+      // setCards((state) => state.filter((c) => c._id !== card._id));
+      const newCards = cards.filter((c) => c._id !== card._id);
+      setCards(newCards);
     })
     .catch(err => console.log(err)); 
   }
