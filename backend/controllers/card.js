@@ -33,7 +33,7 @@ module.exports.deleteCard = (req, res, next) => {
         return next(new ForbiddenError('Нет прав для удаления карточки.'));
       }
       return Card.deleteOne(card)
-        .then(() => res.send(card))
+        .then(() => res.send({ card }))
         .catch((err) => next(err));
     })
     .catch((err) => {
@@ -54,7 +54,7 @@ module.exports.likeCard = (req, res, next) => {
       if (!card) {
         return next(new NotFoundError('Карточка с указанным _id не найдена.'));
       }
-      return res.send(card);
+      return res.send({ card });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -74,7 +74,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (!card) {
         return next(new NotFoundError('Карточка с указанным _id не найдена.'));
       }
-      return res.send(card);
+      return res.send({ card });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
