@@ -101,7 +101,7 @@ function App() {
     if (loggedIn) {
       api.getInitialCards()
       .then((res) => {
-        setCards(res.data)
+        setCards(res)
       })
       .catch(err => console.log(err));
     }
@@ -136,13 +136,13 @@ function App() {
     if (!isLiked) {
       api.addLike(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
       .catch(err => console.log(err));
     } else {
       api.deleteLike(card._id)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
       .catch(err => console.log(err));
     }
@@ -177,7 +177,7 @@ function App() {
   function handleAddPlaceSubmit(data) {
     api.addCard(data)
     .then((newCard) => {
-      setCards([newCard.data, ...cards]);
+      setCards([newCard, ...cards]);
       closeAllPopups();
     })
     .catch(err => console.log(err));
