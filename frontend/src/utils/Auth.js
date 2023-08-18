@@ -31,8 +31,10 @@ export const signIn = ({password, email}) => {
   .then(res => checkResponse(res))
   .then((data) => {
     if (data) {
-      localStorage.setItem('jwt', data.token);
-      return data.token;
+      // localStorage.setItem('jwt', data.token);
+      // return data.token;
+      localStorage.setItem('userId', data._id);
+      return data;
     }
   })
 }
