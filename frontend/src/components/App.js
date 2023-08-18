@@ -91,7 +91,7 @@ function App() {
   React.useEffect(()=> {
     if (loggedIn) {
       api.getUserInfo()
-      .then((res) => {setCurrentUser(res)})
+      .then((res) => {setCurrentUser(res.data)})
       .catch(err => console.log(err))
     }
   }, [loggedIn])
@@ -101,7 +101,7 @@ function App() {
     if (loggedIn) {
       api.getInitialCards()
       .then((res) => {
-        setCards(res)
+        setCards(res.data)
       })
       .catch(err => console.log(err));
     }
