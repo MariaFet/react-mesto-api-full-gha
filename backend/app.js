@@ -51,9 +51,6 @@ app.get('/crash-test', () => {
 app.post('/signup', validateCreateUser, createUser);
 app.post('/signin', validateLogin, login);
 // app.use(auth);
-app.get('/signout', auth, (req, res) => {
-  res.clearCookie('jwt').send({ message: 'Выход' });
-});
 app.use('/users', auth, userRouter);
 app.use('/cards', auth, cardRouter);
 app.use('*', auth, (req, res, next) => next(new NotFoundError('Запрашиваемая страница не найдена.')));
