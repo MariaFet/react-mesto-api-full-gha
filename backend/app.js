@@ -51,9 +51,12 @@ app.get('/crash-test', () => {
 app.post('/signup', validateCreateUser, createUser);
 app.post('/signin', validateLogin, login);
 // app.use(auth);
+app.get('/signout', auth, (req, res) => {
+  res.clearCookie('jwt').send({ message: 'Выход' });
+});
 app.use('/users', auth, userRouter);
 app.use('/cards', auth, cardRouter);
-app.use('*', (req, res, next) => next(new NotFoundError('Запрашиваемая страница не найдена.')));
+app.use('*', auth, (req, res, next) => next(new NotFoundError('Запрашиваемая страница не найдена.')));
 app.use(errorLogger);
 app.use(errors());
 app.use((err, req, res, next) => {

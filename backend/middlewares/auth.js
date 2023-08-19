@@ -12,6 +12,9 @@ const handleAuthError = (res, next) => {
 
 module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
+  if (!token) {
+    return next(new NotAuthorizedError('Отсутствует токен, необходима авторизация.'));
+  }
   let payload;
   try {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'secret-key');

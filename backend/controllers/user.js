@@ -33,20 +33,14 @@ module.exports.getUser = (req, res, next) => {
     });
 };
 
-module.exports.createUser = async (req, res, next) => {
+module.exports.createUser = (req, res, next) => {
   const {
     name, about, avatar, email,
   } = req.body;
-  const isEmailTaken = await User.findOne({ email });
-  if (isEmailTaken) {
-    return next(new ConflictingRequestError('Пользователь с данной почтой уже существует.'));
-  }
   return bcrypt.hash(req.body.password, 10)
-    .then((hash) => {
-      User.create({
-        name, about, avatar, email, password: hash,
-      });
-    })
+    .then((hash) => User.create({
+      name, about, avatar, email, password: hash,
+    }))
     .then(() => {
       res.status(201).send({
         data: {
@@ -120,12 +114,7 @@ module.exports.login = (req, res, next) => {
           return res.send({ data: 'Авторизация прошла успешно.' });
         });
     })
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        return next(new BadRequestError('Переданы некорректные данные при получении пользователя.'));
-      }
-      return next(err);
-    });
+    .catch((err) => next(err));
 };
 
 module.exports.getCurrentUserInfo = (req, res, next) => {
